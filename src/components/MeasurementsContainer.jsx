@@ -1,15 +1,18 @@
 import React from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
-import Measurements from './Measurements';
 import rest from 'rest';
 import json from 'format-json';
+
+import Measurements from './Measurements';
+import settings from '../settings'
+
 
 export default class MeasurementsContainer extends React.Component {
 
   static defaultProps = {
     request: {
       method: 'GET',
-      url: 'https://air.knp-dev.org/api/v1/channels/MAL005-PM10/measurements'
+      url: `${settings.url}/api/v1/channels/MAL005-PM10/measurements`
     }
   };
 

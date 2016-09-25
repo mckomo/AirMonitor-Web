@@ -1,10 +1,10 @@
 import React from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
-import Stations from './Stations';
-import settings from '../settings'
 import rest from 'rest';
 import json from 'format-json';
 
+import Stations from './Stations';
+import settings from '../settings'
 
 export default class StationsContainer extends React.Component {
 

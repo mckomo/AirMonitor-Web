@@ -1,5 +1,5 @@
-const settings = {
+const Settings = {
   url: 'https://air-monitor.pl'
 }
 
-export default settings;
+export default Settings;

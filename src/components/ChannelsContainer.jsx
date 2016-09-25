@@ -1,23 +1,22 @@
 import React from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
-import Channels from './Channels';
 import rest from 'rest';
 import json from 'format-json';
 
+import Channels from './Channels';
+import settings from '../settings'
 
 export default class ChannelsContainer extends React.Component {
 
   static defaultProps = {
     request: {
       method: 'GET',
-      url: 'https://air.knp-dev.org/api/v1/stations/MAL005/channels'
+      url: `${settings.url}/api/v1/stations/MAL005/channels`
     }
   };
 
   constructor(props) {
     super(props);
-
-    console.log(this.props);
     this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
   }
 
