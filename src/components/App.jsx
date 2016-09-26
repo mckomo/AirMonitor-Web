@@ -22,13 +22,21 @@ export class App extends React.Component {
         <StationsContainer
           stations={this.props.stations}
           setStations={this.props.setStations}/>
-        <ChannelsContainer
-          channels={this.props.channels}
-          setChannels={this.props.setChannels}/>
-        <MeasurementsContainer
-          measurements={this.props.measurements}
-          setMeasurements={this.props.setMeasurements}/>
       </div>);
+      
+      // return (
+      //   <div>
+      //     <Header />
+      //     <StationsContainer
+      //       stations={this.props.stations}
+      //       setStations={this.props.setStations}/>
+      //     <ChannelsContainer
+      //       channels={this.props.channels}
+      //       setChannels={this.props.setChannels}/>
+      //     <MeasurementsContainer
+      //       measurements={this.props.measurements}
+      //       setMeasurements={this.props.setMeasurements}/>
+      //   </div>);
   }
 
 }
