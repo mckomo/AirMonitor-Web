@@ -1,7 +1,6 @@
 var webpack = require('webpack');
 var Dotenv = require('dotenv-webpack');
 
-
 module.exports = {
   entry: [
     'webpack-dev-server/client?http://localhost:8080', // Setting the URL for the hot reload
