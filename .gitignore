@@ -1,3 +1,6 @@
+# Secrets
+.env
+
 # Garbage
 .DS_Store
 .idea

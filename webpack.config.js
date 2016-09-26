@@ -1,4 +1,6 @@
-var webpack = require('webpack'); // Requiring the webpack lib
+var webpack = require('webpack');
+var Dotenv = require('dotenv-webpack');
+
 
 module.exports = {
   entry: [
@@ -32,6 +34,10 @@ module.exports = {
     hot: true // Activate hot loading
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin() // Wire in the hot loading plugin
-  ]
+    new webpack.HotModuleReplacementPlugin(),
+    new Dotenv()
+  ],
+  node: {
+    fs: 'empty'
+  }
 };
