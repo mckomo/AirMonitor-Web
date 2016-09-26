@@ -1,7 +1,10 @@
 import React from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
-import GoogleMapsLoader from 'google-maps';
 import classNames from 'classnames';
+import Settings from '../../settings';
+import GoogleMapsLoader from 'google-maps';
+
+GoogleMapsLoader.KEY = Settings.secrets.googleApiKey;
 
 require('../../../styles/modules/map.scss');
 
@@ -21,7 +24,6 @@ export default class GoogleMap extends React.Component {
   }
 
   getClassNames() {
-
     return classNames({
       map: true,
       strip: true,
@@ -30,12 +32,8 @@ export default class GoogleMap extends React.Component {
   }
 
   mountMap() {
-
     const center = {lat: this.props.center.latitude, lng: this.props.center.longitude};
     const zoom = this.props.zoom;
-
-    // console.log(center);
-    console.log(this.props.markers);
 
     GoogleMapsLoader.load(google => {
 
