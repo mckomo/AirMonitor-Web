@@ -42,14 +42,21 @@ export default class GoogleMap extends React.Component {
         zoom: zoom
       });
 
-      this.props.markers.forEach(marker => {
+      this.props.markers.forEach(params => {
 
-        const position = {lat: marker.get('latitude'), lng: marker.get('longitude')}
+        const position = {lat: params.get('latitude'), lng: params.get('longitude')}
 
-        new google.maps.Marker({
+        const marker = new google.maps.Marker({
           position: position,
           map: map,
-          title: marker.get('name')
+        });
+
+        const infowindow = new google.maps.InfoWindow({
+           content: `<strong>${params.get('name')}</strong>`
+        });
+
+        marker.addListener('click', function() {
+            infowindow.open(map, marker);
         });
 
       });
