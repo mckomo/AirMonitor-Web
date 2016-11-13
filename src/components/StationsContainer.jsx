@@ -11,7 +11,7 @@ export default class StationsContainer extends React.Component {
   static defaultProps = {
     request: {
       method: 'GET',
-      url: `${settings.url}/api/v1/stations`
+      url: `${settings.host}/api/v1/stations`
     }
   };
 

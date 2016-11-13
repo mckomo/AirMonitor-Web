@@ -1,8 +1,10 @@
+const env = process.env;
+
 const Settings = {
-  url: 'https://air-monitor.pl',
+  host: env.API_HOST || 'https://air-monitor.pl',
   secrets: {
-    googleApiKey: process.env.GOOGLE_API_KEY
+    googleApiKey: env.GOOGLE_API_KEY || '',
   }
-}
+};
 
 export default Settings;

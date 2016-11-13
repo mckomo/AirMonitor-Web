@@ -1,12 +1,16 @@
 import React from 'react';
+import styles from './header.scss';
 
 export default class Header extends React.Component {
 
   render() {
+    console.log(styles);
+
     return (
-      <header className="page-header">
+      <header className="header">
         <h1>
-          AirMonitor <small>Kraków</small>
+          AirMonitor<br/>
+          <small className="text-muted">Kraków</small>
         </h1>
       </header>);
   }

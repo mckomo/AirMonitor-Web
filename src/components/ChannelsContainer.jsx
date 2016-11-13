@@ -11,7 +11,7 @@ export default class ChannelsContainer extends React.Component {
   static defaultProps = {
     request: {
       method: 'GET',
-      url: `${settings.url}/api/v1/stations/MAL005/channels`
+      url: `${settings.host}/api/v1/stations/MAL005/channels`
     }
   };
 

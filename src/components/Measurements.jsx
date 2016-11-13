@@ -1,6 +1,8 @@
 import React from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
-import HttpMessage from './modules/HttpMessage';
+import HttpMessage from './HttpMessage/index';
+import Chart from './Chart';
+import dateFormat from 'dateformat';
 
 export default class Measurements extends React.Component {
 
@@ -9,8 +11,23 @@ export default class Measurements extends React.Component {
     this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
   }
 
-  render() {
+  getChartData() {
+    return this.props.measurements
+      .map(m => m.get('value'))
+      .reverse()
+      .toArray();
+  }
 
+  getChartLabels() {
+    return this.props.measurements
+      .map(m => m.get('time'))
+      .map(t => new Date(t))
+      .map(d => dateFormat(d, "d mmm H:MM"))
+      .reverse()
+      .toArray();
+  }
+
+  render() {
     return (
       <section>
         <header>
@@ -19,6 +36,25 @@ export default class Measurements extends React.Component {
         <HttpMessage
           request={this.props.measurementsRequest}
           response={this.props.measurementsResponse}/>
+        <Chart title="Pamiar PM10" data={this.getChartData()} labels={this.getChartLabels()} />
+
+        {/*<table className='table'>*/}
+            {/*<thead>*/}
+              {/*<tr>*/}
+                {/*{ ['Czas pamiru kanału', 'Wartość'].map(th => <th key={ th }>{ th }</th>) }*/}
+              {/*</tr>*/}
+            {/*</thead>*/}
+            {/*<tbody>*/}
+            {/*{this.props.measurements.map(m => {*/}
+              {/*return (*/}
+                {/*<tr key={m.get('id')}>*/}
+                  {/*<td>{ m.get('time') }</td>*/}
+                  {/*<td>{ m.get('value') }</td>*/}
+                {/*</tr>*/}
+              {/*);*/}
+            {/*})}*/}
+            {/*</tbody>*/}
+          {/*</table>*/}
       </section>);
   }
 }

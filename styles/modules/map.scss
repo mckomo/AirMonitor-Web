@@ -1,29 +1,9 @@
-$stripHeight: 200px;
 $fullHeight: 500px;
 
 .map {
-
   background-color: #eee;
-
-  &.strip {
-    width: 100%;
-    height: $stripHeight;
-    overflow: hidden;
-  }
-
-  &.full {
-    height: $fullHeight;
-    transition: height 1s;
-
-    .wrapper {
-      margin-top: 0;
-      transition: margin-top 1s;
-    }
-  }
-
+  
   .wrapper {
     height: $fullHeight;
-    margin-top: $fullHeight * -0.25;
   }
-
 }

@@ -2,9 +2,8 @@ var webpack = require('webpack');
 var Dotenv = require('dotenv-webpack');
 
 module.exports = {
+  devtool: 'cheap-module-source-map',
   entry: [
-    'webpack-dev-server/client?http://localhost:8080', // Setting the URL for the hot reload
-    'webpack/hot/only-dev-server', // Reload only the dev server
     './src/index.jsx'
   ],
   module: {
@@ -12,7 +11,7 @@ module.exports = {
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        loader: 'react-hot!babel'
+        loader: 'babel'
       },
       {
         test: /\.scss$/,
@@ -28,13 +27,13 @@ module.exports = {
     publicPath: '/',
     filename: 'bundle.js'
   },
-  devServer: {
-    contentBase: './dist',
-    hot: true // Activate hot loading
-  },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new Dotenv()
+    new Dotenv(),
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify('production')
+      }
+    })
   ],
   node: {
     fs: 'empty'

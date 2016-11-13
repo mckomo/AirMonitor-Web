@@ -16,6 +16,10 @@ function setMeasurements(state, measurements = []) {
   return state.set('measurements', fromJS(measurements));
 }
 
+function setNorms(state, norms = []) {
+  return state.set('norms', fromJS(norms));
+}
+
 export default function (state = Map(), action) {
   switch (action.type) {
     case 'SET_STATE':
@@ -26,6 +30,8 @@ export default function (state = Map(), action) {
       return setChannels(state, action.channels);
     case 'SET_MEASUREMENTS':
       return setMeasurements(state, action.measurements);
+    case 'SET_NORMS':
+      return setNorms(state, action.norms);
   }
 
   return state;

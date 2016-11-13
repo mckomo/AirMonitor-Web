@@ -3,16 +3,15 @@ import PureRenderMixin from 'react-addons-pure-render-mixin';
 import rest from 'rest';
 import json from 'format-json';
 
-import Measurements from './Measurements';
+import Norms from './Norms';
 import settings from '../settings'
 
-
-export default class MeasurementsContainer extends React.Component {
+export default class NormsContainer extends React.Component {
 
   static defaultProps = {
     request: {
       method: 'GET',
-      url: `${settings.host}/api/v1/channels/MAL005-PM10/measurements`
+      url: `${settings.host}/api/v1/norms`
     }
   };
 
@@ -21,13 +20,13 @@ export default class MeasurementsContainer extends React.Component {
     this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
   }
 
-  getMeasurementsRequest() {
+  getRequest() {
     return this.props.request;
   }
 
-  getMeasurementsResponse() {
+  getResponse() {
     return {
-      body: json.plain(this.props.measurements)
+      body: json.plain(this.props.norms)
     };
   }
 
@@ -36,16 +35,16 @@ export default class MeasurementsContainer extends React.Component {
       .then(response => {
         return JSON.parse(response.entity);
       })
-      .then(measurements => {
-        this.props.setMeasurements(measurements);
+      .then(norms => {
+        this.props.setNorms(norms);
       });
   }
 
   render() {
     return (
-      <Measurements { ... this.props }
-        measurementsRequest={this.getMeasurementsRequest()}
-        measurementsResponse={this.getMeasurementsResponse()} />);
+      <Norms { ... this.props }
+        request={this.getRequest()}
+        response={this.getResponse()} />);
   }
 
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
-import HttpMessage from './modules/HttpMessage';
+import HttpMessage from './HttpMessage/index';
 
 export default class Channels extends React.Component {
 
@@ -21,25 +21,28 @@ export default class Channels extends React.Component {
           response={this.props.channelsResponse}/>
         <table className='table'>
           <thead>
-          <tr>
-            {this.props.channels.map(ch => {
-              const subject_code = ch.get('subject').get('code');
-
-              return (
-                <th key={ subject_code }>{ subject_code }</th>);
-            })}
-          </tr>
+            <tr>
+              {[
+                'Kod kanału',
+                'Nazwa pomiaru',
+                'Kod pomiaru',
+                'Jednostka pomiaru',
+                'Nazwa stacji',
+                'Kod stacji'
+              ].map(th => {
+                return (<th key={th}>{ th }</th>)
+              })}
+            </tr>
           </thead>
           <tbody>
           {this.props.channels.map(ch => {
             return (<tr key={ch.get('code')}>
+              <td>{ ch.get('code') }</td>
+              <td>{ ch.get('subject').get('name') }</td>
               <td>{ ch.get('subject').get('code') }</td>
-              <td>{ ch.get('subject').get('code') }</td>
-              <td>{ ch.get('subject').get('code') }</td>
-              <td>{ ch.get('subject').get('code') }</td>
-              <td>{ ch.get('subject').get('code') }</td>
-              <td>{ ch.get('subject').get('code') }</td>
-              <td>{ ch.get('subject').get('code') }</td>
+              <td dangerouslySetInnerHTML={{ __html: ch.get('subject').get('unit') }} />
+              <td>{ ch.get('station').get('name') }</td>
+              <td>{ ch.get('station').get('code') }</td>
             </tr>);
           })}
           </tbody>

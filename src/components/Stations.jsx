@@ -1,7 +1,7 @@
 import React from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
-import HttpMessage from './modules/HttpMessage';
-import GoogleMap from './modules/GoogleMap';
+import HttpMessage from './HttpMessage/index';
+import Map from './Map/index';
 
 
 export default class Stations extends React.Component {
@@ -12,7 +12,6 @@ export default class Stations extends React.Component {
   }
 
   render() {
-
     return (
       <section>
         <header>
@@ -21,9 +20,8 @@ export default class Stations extends React.Component {
         <HttpMessage
           request={this.props.stationsRequest}
           response={this.props.stationsResponse}/>
-        <GoogleMap markers={this.props.stations}/>
+        <Map markers={this.props.stations}/>
       </section>);
   }
-
 
 }

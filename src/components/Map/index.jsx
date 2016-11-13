@@ -1,8 +1,9 @@
 import React from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
+import GoogleMapsLoader from 'google-maps';
 import classNames from 'classnames';
 import Settings from '../../settings';
-import GoogleMapsLoader from 'google-maps';
+import { loadGoogleMap } from './googleMapLoader';
 
 GoogleMapsLoader.KEY = Settings.secrets.googleApiKey;
 
@@ -23,6 +24,14 @@ export default class GoogleMap extends React.Component {
     this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
   }
 
+  componentDidMount() {
+    this.mountMap()
+  }
+
+  componentDidUpdate() {
+    this.mountMap()
+  }
+
   getClassNames() {
     return classNames({
       map: true,
@@ -32,42 +41,20 @@ export default class GoogleMap extends React.Component {
   }
 
   mountMap() {
-    const center = {lat: this.props.center.latitude, lng: this.props.center.longitude};
-    const zoom = this.props.zoom;
+    const params = {
+      center: {
+        lat: this.props.center.latitude,
+        lng: this.props.center.longitude
+      },
+      zoom: this.props.zoom,
+      wrapper: this._wrapper,
+      markers: this.props.markers,
+    };
 
-    GoogleMapsLoader.load(google => {
-
-      const map = new google.maps.Map(this._wrapper, {
-        center: center,
-        zoom: zoom
-      });
-
-      this.props.markers.forEach(params => {
-
-        const position = {lat: params.get('latitude'), lng: params.get('longitude')}
-
-        const marker = new google.maps.Marker({
-          position: position,
-          map: map,
-        });
-
-        const infowindow = new google.maps.InfoWindow({
-           content: `<strong>${params.get('name')}</strong>`
-        });
-
-        marker.addListener('click', function() {
-            infowindow.open(map, marker);
-        });
-
-      });
-
-    });
+    loadGoogleMap(params);
   }
 
   render() {
-
-    this.mountMap();
-
     return (
       <div className={this.getClassNames()}>
         <div ref={ref => this._wrapper = ref } className='wrapper'/>

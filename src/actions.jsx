@@ -18,3 +18,10 @@ export function setMeasurements(measurements) {
     measurements: measurements
   }
 }
+
+export function setNorms(norms) {
+  return {
+    type: 'SET_NORMS',
+    norms: norms
+  }
+}

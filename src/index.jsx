@@ -17,6 +17,7 @@ store.dispatch({
     stations: [],
     channels: [],
     measurements: [],
+    norms: [],
   }
 });
 
