@@ -11,9 +11,9 @@ export default class Response extends React.Component {
 
   render() {
     return (
-      <section className="response">
-        <pre>
-          { this.props.body }
+      <section className="response2">
+        <pre className="response">
+          <code>{ this.props.body }</code>
         </pre>
       </section>);
   }

@@ -21,14 +21,12 @@ export default class HttpMessage extends React.Component {
   render() {
     return (
       <section className="request">
-        <pre className="signature-wrapper">
-          <div className="signature">
-            <span>{this.props.method} {this.props.url}</span>
-          </div>
-          <div className="extra">
-            { this.props.children }
-          </div>
-        </pre>
+        <div className="signature">
+          <a href="#">{this.props.method} {this.props.url}</a>
+        </div>
+        <div className="extra ">
+          { this.props.children }
+        </div>
       </section>);
   }
 }

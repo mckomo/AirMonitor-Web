@@ -3,15 +3,15 @@ import PureRenderMixin from 'react-addons-pure-render-mixin';
 import rest from 'rest';
 import json from 'format-json';
 
-import Norms from './Norms';
+import Channels from '../components/Channels';
 import settings from '../settings'
 
-export default class NormsContainer extends React.Component {
+export default class ChannelsContainer extends React.Component {
 
   static defaultProps = {
     request: {
       method: 'GET',
-      url: `${settings.host}/api/v1/norms`
+      url: `${settings.host}/api/v1/stations/MAL005/channels`
     }
   };
 
@@ -20,31 +20,32 @@ export default class NormsContainer extends React.Component {
     this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
   }
 
-  getRequest() {
-    return this.props.request;
-  }
-
-  getResponse() {
-    return {
-      body: json.plain(this.props.norms)
-    };
-  }
-
   componentDidMount() {
     rest(this.props.request.url)
       .then(response => {
         return JSON.parse(response.entity);
       })
-      .then(norms => {
-        this.props.setNorms(norms);
+      .then(channels => {
+        this.props.setChannels(channels);
       });
+  }
+
+  getChannelsRequest() {
+    return this.props.request;
+  }
+
+  getChannelsResponse() {
+    return {
+      body: json.plain(this.props.channels)
+    };
   }
 
   render() {
     return (
-      <Norms { ... this.props }
-        request={this.getRequest()}
-        response={this.getResponse()} />);
+      <Channels
+        {...this.props}
+        channelsRequest={this.getChannelsRequest()}
+        channelsResponse={this.getChannelsResponse()} />);
   }
 
 }

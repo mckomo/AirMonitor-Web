@@ -1,16 +1,15 @@
-import React from 'react';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
-import HttpMessage from './HttpMessage/index';
+import React from 'react'
+import PureRenderMixin from 'react-addons-pure-render-mixin'
+import HttpMessage from './HttpMessage/index'
 
 export default class Channels extends React.Component {
 
-  constructor(props) {
-    super(props);
-    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
+  constructor (props) {
+    super(props)
+    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this)
   }
 
-  render() {
-
+  render () {
     return (
       <section>
         <header>
@@ -43,12 +42,11 @@ export default class Channels extends React.Component {
               <td dangerouslySetInnerHTML={{ __html: ch.get('subject').get('unit') }} />
               <td>{ ch.get('station').get('name') }</td>
               <td>{ ch.get('station').get('code') }</td>
-            </tr>);
+            </tr>)
           })}
           </tbody>
         </table>
-      </section>);
+      </section>)
   }
-
 
 }

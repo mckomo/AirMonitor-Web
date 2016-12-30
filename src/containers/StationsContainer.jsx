@@ -3,15 +3,15 @@ import PureRenderMixin from 'react-addons-pure-render-mixin';
 import rest from 'rest';
 import json from 'format-json';
 
-import Channels from './Channels';
+import Stations from '../components/Stations';
 import settings from '../settings'
 
-export default class ChannelsContainer extends React.Component {
+export default class StationsContainer extends React.Component {
 
   static defaultProps = {
     request: {
       method: 'GET',
-      url: `${settings.host}/api/v1/stations/MAL005/channels`
+      url: `${settings.host}/api/v1/stations`
     }
   };
 
@@ -25,27 +25,27 @@ export default class ChannelsContainer extends React.Component {
       .then(response => {
         return JSON.parse(response.entity);
       })
-      .then(channels => {
-        this.props.setChannels(channels);
+      .then(stations => {
+        this.props.setStations(stations);
       });
   }
 
-  getChannelsRequest() {
+  getStationsRequest() {
     return this.props.request;
   }
 
-  getChannelsResponse() {
+  getStationsResponse() {
     return {
-      body: json.plain(this.props.channels)
+      body: json.plain(this.props.stations)
     };
   }
 
   render() {
     return (
-      <Channels
-        {...this.props}
-        channelsRequest={this.getChannelsRequest()}
-        channelsResponse={this.getChannelsResponse()} />);
+      <Stations
+        {... this.props}
+        stationsRequest={this.getStationsRequest()}
+        stationsResponse={this.getStationsResponse()}/>);
   }
 
 }

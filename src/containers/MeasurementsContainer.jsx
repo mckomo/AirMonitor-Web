@@ -3,7 +3,7 @@ import PureRenderMixin from 'react-addons-pure-render-mixin';
 import rest from 'rest';
 import json from 'format-json';
 
-import Measurements from './Measurements';
+import Measurements from '../components/Measurements';
 import settings from '../settings'
 
 

@@ -3,15 +3,15 @@ import PureRenderMixin from 'react-addons-pure-render-mixin';
 import rest from 'rest';
 import json from 'format-json';
 
-import Stations from './Stations';
+import Norms from '../components/Norms';
 import settings from '../settings'
 
-export default class StationsContainer extends React.Component {
+export default class NormsContainer extends React.Component {
 
   static defaultProps = {
     request: {
       method: 'GET',
-      url: `${settings.host}/api/v1/stations`
+      url: `${settings.host}/api/v1/norms`
     }
   };
 
@@ -20,32 +20,31 @@ export default class StationsContainer extends React.Component {
     this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
   }
 
+  getRequest() {
+    return this.props.request;
+  }
+
+  getResponse() {
+    return {
+      body: json.plain(this.props.norms)
+    };
+  }
+
   componentDidMount() {
     rest(this.props.request.url)
       .then(response => {
         return JSON.parse(response.entity);
       })
-      .then(stations => {
-        this.props.setStations(stations);
+      .then(norms => {
+        this.props.setNorms(norms);
       });
-  }
-
-  getStationsRequest() {
-    return this.props.request;
-  }
-
-  getStationsResponse() {
-    return {
-      body: json.plain(this.props.stations)
-    };
   }
 
   render() {
     return (
-      <Stations
-        {... this.props}
-        stationsRequest={this.getStationsRequest()}
-        stationsResponse={this.getStationsResponse()}/>);
+      <Norms { ... this.props }
+        request={this.getRequest()}
+        response={this.getResponse()} />);
   }
 
 }

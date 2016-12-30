@@ -23,9 +23,9 @@ export default class HttpMessage extends React.Component {
     return (
       <section className="http-message">
         <Request {...this.props.request}>
-          <a onClick={this.toggleResponse}>
+          <button onClick={this.toggleResponse} className="btn btn-sm btn-outline-primary">
             { this.state.isShowingResponse ? 'Schowaj JSON' : 'Pokaż JSON' }
-          </a>
+          </button>
         </Request>
         {
           this.state.isShowingResponse &&
